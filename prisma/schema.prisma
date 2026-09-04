@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String
+  password      String
+  role          String         @default("GUEST")
+  quizSessions  QuizSession[]
+  settings      UserSettings?
+  createdAt     DateTime       @default(now())
+  lastLoginAt   DateTime?
+}
+
+model UserSettings {
+  id                String    @id @default(cuid())
+  userId            String    @unique
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  studyStreak       Int       @default(0)
+  lastStudyDate     DateTime?
+}
+
+model QuizSession {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topic           String
+  difficulty      String
+  mode            String    @default("EXAM")
+  score           Int
+  totalQuestions  Int
+  correctAnswers  Int
+  timeSpent       Int
+  questions       String
+  answers         String
+  createdAt       DateTime  @default(now())
+  completedAt     DateTime?
+}
+
+model Topic {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  category    String
+  icon        String
+  description String
+  order       Int
+  createdAt   DateTime @default(now())
+}
