@@ -1,30 +1,22 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
+import { ArrowUpRight, Atom, Dna, Flower2, Leaf, Microscope, Orbit, Sparkles, Waves, Zap } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
 import { Reveal } from './reveal';
 
-const topics = [
-  { name: 'Bioteknologi', category: 'Biologi', icon: '🧬' },
-  { name: 'Ekologi', category: 'Biologi', icon: '🌿' },
-  { name: 'Keanekaragaman Makhluk Hidup', category: 'Biologi', icon: '🦋' },
-  { name: 'Makhluk Hidup & Lingkungannya', category: 'Biologi', icon: '🌍' },
-  { name: 'Molekuler, Sel & Organisme', category: 'Biologi', icon: '🔬' },
-  { name: 'Organisasi Kehidupan', category: 'Biologi', icon: '🧫' },
-  { name: 'Pewarisan Sifat', category: 'Biologi', icon: '🧪' },
-  { name: 'Sistem Manusia & Hewan', category: 'Biologi', icon: '🫀' },
-  { name: 'Besaran, Satuan & Pengukuran', category: 'Fisika', icon: '📏' },
-  { name: 'Zat & Kalor', category: 'Fisika', icon: '🌡️' },
-  { name: 'Energi', category: 'Fisika', icon: '⚡' },
-  { name: 'Gerak & Gaya', category: 'Fisika', icon: '🎯' },
-  { name: 'Fluida', category: 'Fisika', icon: '💧' },
-  { name: 'Getaran, Gelombang & Bunyi', category: 'Fisika', icon: '🔊' },
-  { name: 'Cahaya & Optik', category: 'Fisika', icon: '🔭' },
-  { name: 'Kelistrikan & Kemagnetan', category: 'Fisika', icon: '🧲' },
-  { name: 'Bumi & Antariksa', category: 'IPBA', icon: '🪐' },
+const missionTopics = [
+  { name: 'Bioteknologi', category: 'Biologi', icon: Dna, position: 'north-west', detail: 'Belajar bagaimana makhluk hidup membantu manusia menciptakan hal baru.' },
+  { name: 'Ekologi', category: 'Biologi', icon: Leaf, position: 'north-east', detail: 'Pahami hubungan kecil yang menjaga seluruh ekosistem tetap hidup.' },
+  { name: 'Keanekaragaman', category: 'Biologi', icon: Flower2, position: 'west', detail: 'Jelajahi ragam makhluk hidup dan cara mereka dikelompokkan.' },
+  { name: 'Sel & Organisme', category: 'Biologi', icon: Microscope, position: 'east', detail: 'Mulai dari sel kecil sampai sistem kehidupan yang kompleks.' },
+  { name: 'Energi', category: 'Fisika', icon: Zap, position: 'south-west', detail: 'Ikuti perjalanan energi dan perubahan bentuknya di sekitar kita.' },
+  { name: 'Gerak & Gaya', category: 'Fisika', icon: Atom, position: 'south-east', detail: 'Cari tahu kenapa benda bisa bergerak, berhenti, atau berubah arah.' },
+  { name: 'Gelombang & Bunyi', category: 'Fisika', icon: Waves, position: 'south', detail: 'Pahami getaran yang berubah menjadi suara dan gelombang.' },
+  { name: 'Bumi & Antariksa', category: 'IPBA', icon: Orbit, position: 'far-east', detail: 'Perjalanan paling jauh: bumi, tata surya, dan ruang angkasa.' },
 ] as const;
 
-type Topic = (typeof topics)[number];
+type MissionTopic = (typeof missionTopics)[number];
 type Difficulty = 'Easy' | 'Medium' | 'Hard' | 'Insane';
 
 const difficulties: Array<{ name: Difficulty; detail: string; badge: string }> = [
@@ -35,22 +27,17 @@ const difficulties: Array<{ name: Difficulty; detail: string; badge: string }> =
 ];
 
 export function LandingPage() {
-  const [filter, setFilter] = useState<'Semua' | Topic['category']>('Semua');
-  const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null);
+  const [selectedTopic, setSelectedTopic] = useState<MissionTopic | null>(null);
   const [previewTilt, setPreviewTilt] = useState('rotate(3deg)');
+  const [activeTab, setActiveTab] = useState<'Semua' | 'Biologi' | 'Fisika' | 'IPBA'>('Semua');
 
-  const filteredTopics = useMemo(
-    () => (filter === 'Semua' ? topics : topics.filter((topic) => topic.category === filter)),
-    [filter]
-  );
-
-  const scrollToTopics = () => document.getElementById('materi')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToMission = () => document.getElementById('mission-map')?.scrollIntoView({ behavior: 'smooth' });
 
   return (
     <main className="landing-page">
       <nav className="landing-nav" aria-label="Navigasi utama">
         <button className="brand" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          <span className="brand-orbit">✦</span>
+          <span className="brand-orbit"><Sparkles className="icon-tiny" /></span>
           <span>KYI<span>SPACE</span></span>
         </button>
         <div className="nav-actions">
@@ -67,11 +54,15 @@ export function LandingPage() {
             Pilih materi hari ini. Aku bantu siapkan latihannya, kamu fokus menaklukkan satu soal demi satu soal.
           </p>
           <div className="hero-actions">
-            <button type="button" className="button-primary" onClick={scrollToTopics}>Yuk, mulai belajar <span>↗</span></button>
-            <button type="button" className="button-ghost" onClick={() => setSelectedTopic(topics[0])}>Mulai dari sini</button>
+            <button type="button" className="button-primary" onClick={scrollToMission}>Yuk, mulai belajar <ArrowUpRight className="icon-small" /></button>
+            <button type="button" className="button-ghost" onClick={() => setSelectedTopic(missionTopics[0])}>Lihat rute pertama</button>
           </div>
           <div className="hero-proof">
-            <div className="proof-avatars"><i>✦</i><i>⚗</i><i>⌁</i></div>
+            <div className="proof-avatars">
+              <i><Dna className="icon-micro" /></i>
+              <i><Atom className="icon-micro" /></i>
+              <i><Orbit className="icon-micro" /></i>
+            </div>
             <p><strong>17 materi</strong> buat kita<br />kuasai pelan-pelan</p>
           </div>
         </div>
@@ -103,7 +94,7 @@ export function LandingPage() {
               <div><b>D</b> Hewan karnivora</div>
             </div>
           </div>
-          <div className="preview-satellite">✦</div>
+          <div className="preview-satellite"><Sparkles className="icon-small" /></div>
         </div>
       </section>
 
@@ -115,39 +106,92 @@ export function LandingPage() {
         </section>
       </Reveal>
 
-      <section id="materi" className="topics-section">
+      <section id="mission-map" className="mission-section">
         <Reveal className="section-heading">
-          <div><p className="eyebrow"><span /> PILIH HARI INI</p><h2>Mau mulai dari<br /><em>yang mana, kamu?</em></h2></div>
-          <p>Nggak harus langsung semuanya. Ambil satu materi dulu, lalu kita lanjut sedikit demi sedikit.</p>
+          <div><p className="eyebrow"><span /> MISSION MAP</p><h2>Peta perjalanan<br /><em>hari ini, kamu.</em></h2></div>
+          <p>Nggak usah langsung semuanya. Pilih satu titik dulu, kita jelajahi sampai paham.</p>
         </Reveal>
-        <div className="topic-filters" role="tablist" aria-label="Filter materi">
-          {(['Semua', 'Biologi', 'Fisika', 'IPBA'] as const).map((item) => (
-            <button key={item} role="tab" aria-selected={filter === item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>
-              {item}{item === 'Semua' ? ' · 17' : ''}
-            </button>
-          ))}
-        </div>
-        <Reveal>
-          <div className="topic-grid">
-            {filteredTopics.map((topic, index) => (
-              <button className="topic-card glass-card" style={{ '--card-index': index } as React.CSSProperties} onClick={() => setSelectedTopic(topic)} key={topic.name}>
-                <span className="topic-icon">{topic.icon}</span>
-                <span className="topic-meta">{topic.category}</span>
-                <strong>{topic.name}</strong>
-                <span className="topic-arrow">↗</span>
-              </button>
-            ))}
+
+        <div className="mission-map-frame glass-card">
+          <div className="mission-constellations" aria-hidden="true">
+            <svg viewBox="0 0 1000 600" className="constellation-svg">
+              <path d="M500,300 L260,160 L180,300 L280,440 L500,300 L740,160 L820,300 L720,440 Z" />
+              <circle cx="500" cy="300" r="140" className="core-orbit" />
+              <circle cx="500" cy="300" r="230" className="outer-orbit" />
+            </svg>
           </div>
-        </Reveal>
+
+          <div className="mission-core">
+            <div className="core-beacon"><Sparkles className="icon-medium" /></div>
+            <strong>Titik Mulai</strong>
+            <small>Pilih salah satu planet materi</small>
+          </div>
+
+          <div className="mission-nodes" aria-label="Daftar titik materi">
+            {missionTopics.map((node) => {
+              const Icon = node.icon;
+              return (
+                <button
+                  type="button"
+                  key={node.name}
+                  className={`mission-node node-${node.position} ${selectedTopic?.name === node.name ? 'is-active' : ''}`}
+                  onClick={() => setSelectedTopic(node)}
+                >
+                  <span className="node-halo" />
+                  <span className="node-badge"><Icon className="icon-small" /></span>
+                  <span className="node-title">{node.name}</span>
+                  <span className="node-category">{node.category}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="mission-sidebar">
+            <div className="sidebar-filter">
+              {(['Semua', 'Biologi', 'Fisika', 'IPBA'] as const).map((tab) => (
+                <button
+                  key={tab}
+                  type="button"
+                  className={activeTab === tab ? 'active' : ''}
+                  onClick={() => setActiveTab(tab)}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+
+            <div className="mission-quick-list">
+              {missionTopics
+                .filter((item) => activeTab === 'Semua' || item.category === activeTab)
+                .map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <button
+                      key={item.name}
+                      type="button"
+                      className={`quick-item ${selectedTopic?.name === item.name ? 'active' : ''}`}
+                      onClick={() => setSelectedTopic(item)}
+                    >
+                      <Icon className="icon-small" />
+                      <span>{item.name}</span>
+                      <small>{item.category}</small>
+                    </button>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
       </section>
 
       {selectedTopic && (
         <div className="modal-backdrop" role="presentation" onMouseDown={() => setSelectedTopic(null)}>
           <section className="difficulty-modal glass-card" role="dialog" aria-modal="true" aria-labelledby="difficulty-title" onMouseDown={(event) => event.stopPropagation()}>
             <button className="modal-close" type="button" onClick={() => setSelectedTopic(null)} aria-label="Tutup">×</button>
-            <p className="eyebrow"><span /> MULAI KUIS</p>
-            <h2 id="difficulty-title">{selectedTopic.icon} {selectedTopic.name}</h2>
-            <p className="modal-intro">Pilih ritme yang paling nyaman buat kamu. Kita mulai dari sana.</p>
+            <p className="eyebrow"><span /> DETAIL PERJALANAN</p>
+            <h2 id="difficulty-title">
+              <selectedTopic.icon className="icon-medium inline-icon" /> {selectedTopic.name}
+            </h2>
+            <p className="modal-intro">{selectedTopic.detail}</p>
             <div className="difficulty-list">
               {difficulties.map((difficulty) => (
                 <button type="button" key={difficulty.name} className={`difficulty-item difficulty-${difficulty.name.toLowerCase()}`} onClick={() => setSelectedTopic(null)}>
