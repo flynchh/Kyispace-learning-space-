@@ -28,7 +28,7 @@ export async function generateQuiz(
   difficulty: Difficulty,
   count: number = 15
 ): Promise<QuizQuestion[]> {
-  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+  const model = genAI.getGenerativeModel({ model: 'gemini-3.6-flash' });
 
   const prompt = `Kamu adalah generator soal IPA Terpadu SMP untuk persiapan lomba KSR (Kompetisi Sains SMP).
 

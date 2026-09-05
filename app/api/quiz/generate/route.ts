@@ -14,11 +14,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { topic, difficulty } = await request.json();
+    let body: { topic?: string; difficulty?: string } = {};
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json(
+        { error: 'Invalid JSON body. Set Content-Type: application/json' },
+        { status: 400 }
+      );
+    }
+
+    const { topic, difficulty } = body;
 
     if (!topic || !difficulty) {
       return NextResponse.json(
-        { error: 'Topic and difficulty are required' },
+        { error: 'Topic and difficulty are required', received: body },
         { status: 400 }
       );
     }
