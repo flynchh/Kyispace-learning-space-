@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
+import { Reveal } from './reveal';
 
 const topics = [
   { name: 'Bioteknologi', category: 'Biologi', icon: '🧬' },
@@ -36,6 +37,7 @@ const difficulties: Array<{ name: Difficulty; detail: string; badge: string }> =
 export function LandingPage() {
   const [filter, setFilter] = useState<'Semua' | Topic['category']>('Semua');
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null);
+  const [previewTilt, setPreviewTilt] = useState('rotate(3deg)');
 
   const filteredTopics = useMemo(
     () => (filter === 'Semua' ? topics : topics.filter((topic) => topic.category === filter)),
@@ -59,27 +61,37 @@ export function LandingPage() {
 
       <section className="hero-section">
         <div className="hero-copy">
-          <p className="eyebrow"><span /> KSR IPA SMP · AI PRACTICE</p>
-          <h1>Ruang latihan buat <em>naik level.</em></h1>
+          <p className="eyebrow"><span /> RUANG KECIL BUAT PERJUANGANMU</p>
+          <h1>Satu langkah lagi<br />buat <em>mimpi kamu.</em></h1>
           <p className="hero-description">
-            Pilih materi, atur tingkat kesulitan, lalu hadapi 15 soal IPA yang dibuat AI khusus buat latihan lomba.
+            Pilih materi hari ini. Aku bantu siapkan latihannya, kamu fokus menaklukkan satu soal demi satu soal.
           </p>
           <div className="hero-actions">
-            <button type="button" className="button-primary" onClick={scrollToTopics}>Mulai latihan <span>↗</span></button>
-            <button type="button" className="button-ghost" onClick={() => setSelectedTopic(topics[0])}>Coba sekarang</button>
+            <button type="button" className="button-primary" onClick={scrollToTopics}>Yuk, mulai belajar <span>↗</span></button>
+            <button type="button" className="button-ghost" onClick={() => setSelectedTopic(topics[0])}>Mulai dari sini</button>
           </div>
           <div className="hero-proof">
             <div className="proof-avatars"><i>✦</i><i>⚗</i><i>⌁</i></div>
-            <p><strong>17 materi</strong> IPA Terpadu<br />buat KSR SMP</p>
+            <p><strong>17 materi</strong> buat kita<br />kuasai pelan-pelan</p>
           </div>
         </div>
 
-        <div className="hero-visual" aria-label="Preview kuis">
+        <div
+          className="hero-visual"
+          aria-label="Preview kuis"
+          onPointerMove={(event) => {
+            const bounds = event.currentTarget.getBoundingClientRect();
+            const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+            const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+            setPreviewTilt(`rotate(${3 + x * 6}deg) translate3d(${x * 12}px, ${y * 12}px, 0)`);
+          }}
+          onPointerLeave={() => setPreviewTilt('rotate(3deg)')}
+        >
           <div className="orbit-line orbit-line-one" />
           <div className="orbit-line orbit-line-two" />
           <div className="hero-rock hero-rock-one" />
           <div className="hero-rock hero-rock-two" />
-          <div className="quiz-preview glass-card">
+          <div className="quiz-preview glass-card" style={{ transform: previewTilt }}>
             <div className="preview-topline"><span>LIVE QUIZ</span><b>08:42</b></div>
             <div className="preview-progress"><i /></div>
             <p className="preview-label">SOAL 08 / 15</p>
@@ -95,17 +107,19 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section className="feature-strip" aria-label="Keunggulan aplikasi">
-        <article><span>01</span><div><b>Soal selalu fresh</b><p>AI bikin paket baru setiap mulai.</p></div></article>
-        <article><span>02</span><div><b>Mode Insane</b><p>10 detik tiap soal buat speedrun.</p></div></article>
-        <article><span>03</span><div><b>Review salah</b><p>Balik ke konsep yang belum kuat.</p></div></article>
-      </section>
+      <Reveal>
+        <section className="feature-strip" aria-label="Teman belajarmu">
+          <article><span>01</span><div><b>Soal baru buat kamu</b><p>Setiap mulai, ada latihan fresh yang nunggu kamu.</p></div></article>
+          <article><span>02</span><div><b>Kalau mau menantang diri</b><p>Mode Insane: 10 detik tiap soal. Kita coba kalau kamu siap.</p></div></article>
+          <article><span>03</span><div><b>Yang salah, kita ulang</b><p>Bukan gagal. Cuma bagian yang perlu kita pahami lagi.</p></div></article>
+        </section>
+      </Reveal>
 
       <section id="materi" className="topics-section">
-        <div className="section-heading">
-          <div><p className="eyebrow"><span /> EXPLORE</p><h2>Pilih dunia<br /><em>yang mau ditaklukkan.</em></h2></div>
-          <p>17 topik IPA Terpadu. Mulai dari yang paling pengen kamu kuasai hari ini.</p>
-        </div>
+        <Reveal className="section-heading">
+          <div><p className="eyebrow"><span /> PILIH HARI INI</p><h2>Mau mulai dari<br /><em>yang mana, kamu?</em></h2></div>
+          <p>Nggak harus langsung semuanya. Ambil satu materi dulu, lalu kita lanjut sedikit demi sedikit.</p>
+        </Reveal>
         <div className="topic-filters" role="tablist" aria-label="Filter materi">
           {(['Semua', 'Biologi', 'Fisika', 'IPBA'] as const).map((item) => (
             <button key={item} role="tab" aria-selected={filter === item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>
@@ -113,16 +127,18 @@ export function LandingPage() {
             </button>
           ))}
         </div>
-        <div className="topic-grid">
-          {filteredTopics.map((topic, index) => (
-            <button className="topic-card glass-card" style={{ '--card-index': index } as React.CSSProperties} onClick={() => setSelectedTopic(topic)} key={topic.name}>
-              <span className="topic-icon">{topic.icon}</span>
-              <span className="topic-meta">{topic.category}</span>
-              <strong>{topic.name}</strong>
-              <span className="topic-arrow">↗</span>
-            </button>
-          ))}
-        </div>
+        <Reveal>
+          <div className="topic-grid">
+            {filteredTopics.map((topic, index) => (
+              <button className="topic-card glass-card" style={{ '--card-index': index } as React.CSSProperties} onClick={() => setSelectedTopic(topic)} key={topic.name}>
+                <span className="topic-icon">{topic.icon}</span>
+                <span className="topic-meta">{topic.category}</span>
+                <strong>{topic.name}</strong>
+                <span className="topic-arrow">↗</span>
+              </button>
+            ))}
+          </div>
+        </Reveal>
       </section>
 
       {selectedTopic && (
@@ -131,7 +147,7 @@ export function LandingPage() {
             <button className="modal-close" type="button" onClick={() => setSelectedTopic(null)} aria-label="Tutup">×</button>
             <p className="eyebrow"><span /> MULAI KUIS</p>
             <h2 id="difficulty-title">{selectedTopic.icon} {selectedTopic.name}</h2>
-            <p className="modal-intro">Pilih tantangan buat 15 soal latihanmu.</p>
+            <p className="modal-intro">Pilih ritme yang paling nyaman buat kamu. Kita mulai dari sana.</p>
             <div className="difficulty-list">
               {difficulties.map((difficulty) => (
                 <button type="button" key={difficulty.name} className={`difficulty-item difficulty-${difficulty.name.toLowerCase()}`} onClick={() => setSelectedTopic(null)}>

@@ -102,11 +102,10 @@ button { -webkit-tap-highlight-color: transparent; }
 .cloud-one { top: 14%; left: -20rem; animation-duration: 38s; }
 .cloud-two { top: 43%; left: -23rem; transform: scale(.68); opacity: .53; animation-duration: 46s; animation-delay: -20s; }
 .cloud-three { top: 72%; left: -20rem; transform: scale(1.14); opacity: .5; animation-duration: 56s; animation-delay: -32s; }
-.bird-flock { position: absolute; display: flex; gap: .9rem; color: rgba(37,78,112,.72); animation: birdFly 25s linear infinite; will-change: transform; }
-.bird-flock i { position: relative; width: 1.15rem; height: .55rem; display: block; border-top: 2px solid currentColor; border-radius: 50% 50% 0 0; transform: rotate(12deg); }
-.bird-flock i::after { content: ''; position: absolute; width: 1.15rem; height: .55rem; left: .95rem; top: -.13rem; border-top: 2px solid currentColor; border-radius: 50% 50% 0 0; transform: rotate(-24deg); }
-.bird-flock-one { top: 27%; left: -9rem; animation-delay: -8s; }
-.bird-flock-two { top: 63%; left: -8rem; transform: scale(.7); opacity: .68; animation-duration: 34s; animation-delay: -19s; }
+.bird { position: absolute; display: block; width: 1.2rem; height: .58rem; color: rgba(29,68,101,.78); border-top: 2px solid currentColor; border-radius: 50% 50% 0 0; opacity: .8; will-change: transform; }
+.bird::after { content: ''; position: absolute; width: 1.2rem; height: .58rem; left: 1rem; top: -.14rem; border-top: 2px solid currentColor; border-radius: 50% 50% 0 0; transform: rotate(-24deg); }
+.bird-small { transform: scale(.65); opacity: .56; }.bird-medium { transform: scale(.9); }.bird-large { transform: scale(1.2); opacity: .7; }
+.bird-one { top: 25%; left: -5rem; animation: birdFlyOne 21s linear infinite -5s; }.bird-two { top: 38%; left: -8rem; animation: birdFlyTwo 29s linear infinite -17s; }.bird-three { top: 59%; left: -6rem; animation: birdFlyThree 33s linear infinite -12s; }.bird-four { top: 16%; left: -6rem; animation: birdFlyFour 26s linear infinite -22s; }.bird-five { top: 72%; left: -7rem; animation: birdFlyFive 38s linear infinite -31s; }
 
 .glass-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1.5rem; box-shadow: 0 18px 60px var(--shadow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
 .theme-toggle { min-height: 44px; display: inline-flex; align-items: center; gap: .55rem; padding: .45rem .8rem .45rem .5rem; color: var(--foreground); background: var(--surface-strong); border: 1px solid var(--border); border-radius: 999px; box-shadow: 0 10px 30px var(--shadow); cursor: pointer; transition: transform .2s ease, background .45s ease, box-shadow .2s ease; }
@@ -124,7 +123,11 @@ button { -webkit-tap-highlight-color: transparent; }
 @keyframes sparkTwo { 0% { opacity: 1; transform: translate3d(0,0,0) scale(1); } 100% { opacity: 0; transform: translate3d(4rem,.9rem,0) scale(.18); } }
 @keyframes sparkThree { 0% { opacity: .9; transform: translate3d(0,0,0) scale(.8); } 100% { opacity: 0; transform: translate3d(5.5rem,-.25rem,0) scale(.1); } }
 @keyframes cloudDrift { from { transform: translate3d(0,0,0); } to { transform: translate3d(calc(100vw + 28rem),0,0); } }
-@keyframes birdFly { from { transform: translate3d(0,0,0); } to { transform: translate3d(calc(100vw + 14rem),-3rem,0); } }
+@keyframes birdFlyOne { from { transform: translate3d(0,0,0) scale(.9); } 50% { transform: translate3d(55vw,-2.8rem,0) scale(.96); } to { transform: translate3d(calc(100vw + 9rem),-1rem,0) scale(.9); } }
+@keyframes birdFlyTwo { from { transform: translate3d(0,0,0) scale(.65); } 55% { transform: translate3d(58vw,3rem,0) scale(.7); } to { transform: translate3d(calc(100vw + 9rem),-.5rem,0) scale(.65); } }
+@keyframes birdFlyThree { from { transform: translate3d(0,0,0) scale(1.2); } 44% { transform: translate3d(47vw,-4rem,0) scale(1.12); } to { transform: translate3d(calc(100vw + 9rem),-7rem,0) scale(1.2); } }
+@keyframes birdFlyFour { from { transform: translate3d(0,0,0) scale(.65); } 52% { transform: translate3d(51vw,1.8rem,0) scale(.7); } to { transform: translate3d(calc(100vw + 9rem),5rem,0) scale(.65); } }
+@keyframes birdFlyFive { from { transform: translate3d(0,0,0) scale(.9); } 48% { transform: translate3d(49vw,-1.5rem,0) scale(.82); } to { transform: translate3d(calc(100vw + 9rem),2rem,0) scale(.9); } }
 @keyframes toggleSpin { from { transform: rotate(-180deg) scale(.65); } to { transform: rotate(0) scale(1); } }
 
 @media (max-width: 480px) {
@@ -134,6 +137,7 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 
 .landing-page { width: min(100%, 1440px); margin: 0 auto; padding: 1rem clamp(1rem, 4vw, 4.5rem) 5rem; color: var(--foreground); }
+.reveal { opacity: 0; transform: translate3d(0,2.2rem,0) scale(.985); transition: opacity .75s cubic-bezier(.16,.9,.25,1), transform .75s cubic-bezier(.16,.9,.25,1); }.reveal-visible { opacity: 1; transform: translate3d(0,0,0) scale(1); }
 .landing-nav { min-height: 4.35rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .brand { padding: 0; display: inline-flex; align-items: center; gap: .55rem; color: var(--foreground); background: transparent; border: 0; font-size: .93rem; font-weight: 850; letter-spacing: -.03em; cursor: pointer; }
 .brand > span:last-child span { margin-left: .15rem; color: var(--muted); font-weight: 600; }
