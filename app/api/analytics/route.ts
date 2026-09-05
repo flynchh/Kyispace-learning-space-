@@ -56,7 +56,7 @@ export async function GET() {
     });
 
     const weakAreas = Object.entries(topicMastery)
-      .filter(([_, avg]) => avg < 70)
+      .filter(([, avg]) => avg < 70)
       .map(([topic]) => topic);
 
     const recentSessions = sessions.slice(0, 5).map((s) => ({
