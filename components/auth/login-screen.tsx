@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Sparkles, Lock, Mail, Eye, EyeOff, ArrowRight, Shield, User, Compass } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
+import { FlyoverTransition } from '@/components/transition/flyover-transition';
 
 interface LoginScreenProps {
   onLoginSuccess?: (user: { id: string; email: string; name: string; role: string }) => void;
@@ -17,6 +18,8 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isShaking, setIsShaking] = useState(false);
+  const [showFlyover, setShowFlyover] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState<{ id: string; email: string; name: string; role: string } | null>(null);
 
   const handleSubmit = async (e?: React.FormEvent, customEmail?: string, customPassword?: string) => {
     if (e) e.preventDefault();
@@ -50,14 +53,20 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
         return;
       }
 
-      if (onLoginSuccess) {
-        onLoginSuccess(data.user);
-      } else {
-        router.refresh();
-      }
+      // Trigger flyover animation!
+      setLoggedInUser(data.user);
+      setShowFlyover(true);
     } catch {
       triggerError('Terjadi gangguan jaringan. Coba lagi yaa');
       setIsLoading(false);
+    }
+  };
+
+  const handleFlyoverFinished = () => {
+    if (loggedInUser && onLoginSuccess) {
+      onLoginSuccess(loggedInUser);
+    } else {
+      router.refresh();
     }
   };
 
@@ -212,6 +221,13 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
           </div>
         </div>
       </section>
+
+      {/* Flyover transition overlay */}
+      <FlyoverTransition
+        isActive={showFlyover}
+        userName={loggedInUser?.name}
+        onFinished={handleFlyoverFinished}
+      />
     </main>
   );
 }
