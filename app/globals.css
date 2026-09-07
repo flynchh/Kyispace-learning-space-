@@ -251,5 +251,52 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 .animate-planeFly { animation: planeFly 1.4s ease-out forwards; }
 
+@keyframes wipeShrink {
+  0% { transform: scaleX(0) scaleY(0); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: scaleX(1) scaleY(1); opacity: 0; }
+}
+@keyframes vaporGrow {
+  0% { transform: scaleX(0); opacity: 0; filter: blur(0px); }
+  30% { opacity: 0.8; filter: blur(2px); }
+  100% { transform: scaleX(1); opacity: 0; filter: blur(12px); }
+}
+
+/* Flyover Transition Overlay */
+.flyover-root { position: fixed; inset: 0; z-index: [100]; display: grid; place-items: center; pointer-events: none; overflow: hidden; }
+.flyover-backdrop { position: absolute; inset: 0; transition: opacity 0.4s ease; }
+.flyover-backdrop-space { background: radial-gradient(circle at 30% 70%, rgba(103,232,249,0.18), transparent 50%), #000; }
+.flyover-backdrop-sky { background: radial-gradient(circle at 70% 30%, rgba(56,189,248,0.2), transparent 40%), linear-gradient(160deg, #7dd3fc 0%, #c7efff 47%, #effcff 100%); }
+
+/* Text layer */
+.flyover-text { position: relative; z-index: 2; text-align: center; padding: 1rem; transition: opacity 0.5s ease; }
+.flyover-text.is-fading { opacity: 0; }
+.flyover-label { display: inline-block; margin: 0 0 .5rem; color: var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+.flyover-title { margin: 0 0 .6rem; font-size: clamp(1.6rem, 5vw, 2.6rem); font-weight: 850; color: #fff; letter-spacing: -.04em; }
+.flyover-sub { margin: 0; color: rgba(255,255,255,.65); font-size: .82rem; line-height: 1.5; }
+
+/* Craft wrapper */
+.flyover-craft { position: absolute; inset: 0; pointer-events: none; }
+.flyover-craft-sky { display: grid; place-items: center; }
+
+/* Rocket exhaust — fills screen diagonally */
+.rocket-exhaust { position: absolute; left: 18%; bottom: 18%; width: 70%; height: 60%; transform-origin: bottom left; }
+.exhaust-core { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 28%; height: 70%; background: linear-gradient(to top, rgba(249,115,22,0.85), rgba(251,191,36,0.55), transparent); border-radius: 99px; filter: blur(8px); animation: wipeShrink 2s ease-out forwards; }
+.exhaust-mid { position: absolute; bottom: 0; left: 35%; width: 38%; height: 55%; background: linear-gradient(to top, rgba(251,146,60,0.6), rgba(255,255,255,0.25), transparent); border-radius: 99px; filter: blur(5px); animation: wipeShrink 2s ease-out forwards; animation-delay: .1s; }
+.exhaust-outer { position: absolute; bottom: 0; left: 50%; width: 55%; height: 45%; background: linear-gradient(to top, rgba(103,232,249,0.4), rgba(255,255,255,0.12), transparent); border-radius: 99px; filter: blur(10px); animation: wipeShrink 2s ease-out forwards; animation-delay: .2s; }
+
+/* Rocket SVG — large, centered */
+.rocket-svg { position: absolute; left: 6%; top: 40%; width: min(50vw, 200px); height: min(50vw, 200px); transform-origin: center; z-index: 3; }
+
+/* Plane vapor — fills screen horizontally */
+.plane-vapor { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden; }
+.vapor-core { position: absolute; top: 48%; left: -10%; width: 120%; height: 6rem; background: rgba(255,255,255,0.7); border-radius: 999px; filter: blur(14px); animation: vaporGrow 2.2s ease-out forwards; z-index: 1; }
+.vapor-mid { position: absolute; top: 45%; left: -5%; width: 110%; height: 4rem; background: rgba(255,255,255,0.45); border-radius: 999px; filter: blur(10px); animation: vaporGrow 2.2s ease-out forwards; animation-delay: .2s; z-index: 1; }
+.vapor-outer { position: absolute; top: 42%; left: 0%; width: 100%; height: 2.5rem; background: rgba(255,255,255,0.22); border-radius: 999px; filter: blur(6px); animation: vaporGrow 2.2s ease-out forwards; animation-delay: .4s; z-index: 1; }
+.vapor-far { position: absolute; top: 40%; left: 5%; width: 90%; height: 1.5rem; background: rgba(255,255,255,0.1); border-radius: 999px; filter: blur(4px); animation: vaporGrow 2.2s ease-out forwards; animation-delay: .6s; z-index: 1; }
+
+/* Plane SVG — large, centered */
+.plane-svg { position: absolute; left: 40%; top: 42%; width: min(40vw, 180px); height: min(40vw, 115px); transform-origin: center; z-index: 3; }
+
 @media (max-width: 800px) { .landing-page { padding: .75rem 1rem 4rem; }.hero-section { grid-template-columns: 1fr; min-height: 0; padding: 4.4rem 0 3rem; gap: 2rem; }.hero-copy { max-width: 35rem; }.hero-visual { min-height: 22rem; order: -1; }.quiz-preview { width: min(100%, 24rem); }.feature-strip { grid-template-columns: 1fr; }.feature-strip article { padding: 1.05rem; }.section-heading { display: block; }.section-heading > p { margin-top: 1.1rem; }.topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }.topic-card { min-height: 9.5rem; } }
 

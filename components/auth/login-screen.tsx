@@ -102,10 +102,10 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
         <div className="text-center mb-6">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-muted font-medium mb-3">
             <Sparkles className="w-3.5 h-3.5 text-accent" />
-            <span>KYI SPACE · KSR IPA SMP</span>
+            <span>RUANG BELAJAR</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-            Ruang Belajarmu ✨
+            Ruang Belajarmu
           </h1>
           <p className="text-xs sm:text-sm text-muted mt-1.5 leading-relaxed">
             Untuk kamu yang sedang berjuang menaklukkan mimpi.
