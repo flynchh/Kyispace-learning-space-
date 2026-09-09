@@ -14,7 +14,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   useEffect(() => {
     hydrate();
-  }, [hydrate]);
+  }, []);
 
   return (
     <div className={`theme-shell theme-${hydrated ? theme : 'space'}`}>

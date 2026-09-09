@@ -1,8 +1,12 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { BookOpen, Home, LogOut, TrendingUp } from 'lucide-react';
+import { BookOpen, Home, LogOut, TrendingUp, Volume2, VolumeX } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
+import { getGreeting } from '@/lib/personal-messages';
+import { persistentSession } from '@/lib/persistent-session';
+import { useSoundEffects } from '@/hooks/use-sound';
 
 type AppShellProps = {
   userName: string;
@@ -19,10 +23,29 @@ const tabs = [
 export function AppShell({ userName, userRole, children }: AppShellProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [greeting, setGreeting] = useState(`Halo, ${userName}`);
+  const { isMuted, toggleMute } = useSoundEffects();
+
+  useEffect(() => {
+    setGreeting(getGreeting(userName));
+  }, [userName]);
 
   const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' });
-    router.refresh();
+    setIsLoggingOut(true);
+    try {
+      const res = await fetch('/api/auth/logout', { method: 'POST' });
+      if (res.ok) {
+        persistentSession.clear();
+        router.refresh();
+      } else {
+        console.error('Logout failed');
+        setIsLoggingOut(false);
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+      setIsLoggingOut(false);
+    }
   };
 
   return (
@@ -30,7 +53,6 @@ export function AppShell({ userName, userRole, children }: AppShellProps) {
       <header className="app-topbar">
         <div>
           <div className="flex items-center gap-2">
-            <p className="app-kicker">KYI SPACE</p>
             {userRole === 'GUEST' && (
               <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
                 Mode Tamu
@@ -42,13 +64,31 @@ export function AppShell({ userName, userRole, children }: AppShellProps) {
               </span>
             )}
           </div>
-          <h1 className="app-greeting">Halo, {userName} ✨</h1>
+          <h1 className="app-greeting">{greeting}</h1>
         </div>
         <div className="app-topbar-actions">
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={toggleMute}
+            aria-label={isMuted ? 'Nyalakan suara' : 'Matikan suara'}
+            title={isMuted ? 'Suara Mati' : 'Suara Nyala'}
+          >
+            <span className="theme-toggle-icon">
+              {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+            </span>
+            <span className="theme-toggle-label">{isMuted ? 'Mute' : 'Sound'}</span>
+          </button>
           <ThemeToggle />
-          <button type="button" className="logout-btn" onClick={handleLogout} aria-label="Keluar">
+          <button 
+            type="button" 
+            className="logout-btn" 
+            onClick={handleLogout} 
+            aria-label="Keluar"
+            disabled={isLoggingOut}
+          >
             <LogOut className="icon-small" />
-            <span>Keluar</span>
+            <span>{isLoggingOut ? 'Loading...' : 'Keluar'}</span>
           </button>
         </div>
       </header>
