@@ -41,30 +41,12 @@ async function main() {
   }
   console.log('✅ Topics created (17 topics)');
 
-  const adminPassword = await bcrypt.hash('admin123', 10);
-  await prisma.user.create({
-    data: {
-      email: 'admin@kyilearning.space',
-      name: 'Admin',
-      password: adminPassword,
-      role: 'ADMIN',
-      settings: {
-        create: {
-          studyStreak: 0,
-        },
-      },
-    },
-  });
-  console.log('✅ Admin user created');
-  console.log('   Email: admin@kyilearning.space');
-  console.log('   Password: admin123');
-
-  const userPassword = await bcrypt.hash('user123', 10);
+  const kiyaPassword = await bcrypt.hash('040726', 10);
   await prisma.user.create({
     data: {
       email: 'user@kyilearning.space',
-      name: 'Student',
-      password: userPassword,
+      name: 'Kiya',
+      password: kiyaPassword,
       role: 'USER',
       settings: {
         create: {
@@ -73,17 +55,17 @@ async function main() {
       },
     },
   });
-  console.log('✅ Main user created');
+  console.log('✅ Kiya user created');
   console.log('   Email: user@kyilearning.space');
-  console.log('   Password: user123');
+  console.log('   Password: 040726');
 
-  const guestPassword = await bcrypt.hash('guest123', 10);
+  const bibinPassword = await bcrypt.hash('asu123', 10);
   await prisma.user.create({
     data: {
-      email: 'guest@kyilearning.space',
-      name: 'Guest',
-      password: guestPassword,
-      role: 'GUEST',
+      email: 'bibin@kyilearning.space',
+      name: 'Bibin',
+      password: bibinPassword,
+      role: 'ADMIN',
       settings: {
         create: {
           studyStreak: 0,
@@ -91,9 +73,9 @@ async function main() {
       },
     },
   });
-  console.log('✅ Guest user created');
-  console.log('   Email: guest@kyilearning.space');
-  console.log('   Password: guest123');
+  console.log('✅ Bibin user created');
+  console.log('   Email: bibin@kyilearning.space');
+  console.log('   Password: asu123');
 
   console.log('🎉 Seeding completed!');
 }
