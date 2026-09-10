@@ -111,7 +111,7 @@ export function SmartLoginScreen() {
               KYI Learning Space
             </h1>
             <p className="text-xs sm:text-sm text-muted mt-1.5 leading-relaxed">
-Tempat latihan KSR untuk Kiya. Yuk mulai belajar! ✨
+Kiyaa Learning Space. Gaskeun belajar cuk! 
             </p>
           </div>
 

@@ -22,21 +22,21 @@ export function getGreeting(name: string = 'Kiya'): string {
   const hour = new Date().getHours();
   
   const morningGreetings = [
-    `Selamat pagi ${name}! Semangat belajarnya! ☀️`,
-    `Morning ${name}! Ready taklukkin soal hari ini? 💪`,
+    `Selamat pagi ${name}! Semangat belajarnya!`,
+    `Morning ${name}! Ready taklukkin soal hari ini?`,
     `Pagi ${name}! Jeya siap nemenin belajar! 🐼`,
   ];
   
   const afternoonGreetings = [
-    `Halo ${name}! Semangat siang-siangnya! 🌤️`,
-    `Siang ${name}! Istirahat dulu atau lanjut belajar? 🐼`,
-    `Afternoon ${name}! Let's keep the momentum! ✨`,
+    `Halo ${name}! Selamat siang gendutt`,
+    `Siang ${name}! Istirahat dulu atau lanjut belajar?`,
+    `Afternoon ${name}! Let's keep the momentum!`,
   ];
   
   const eveningGreetings = [
-    `Malam ${name}! Masih semangat? 🌙✨`,
-    `Evening study session! Let's go ${name}! 🎯`,
-    `Malam ${name}! Jeya nemenin belajar yaa! 🐼💪`,
+    `Malam ${name}! Masih semangat? ✨`,
+    `Evening study session! Let's go ${name}!`,
+    `Malam ${name}! Jeya nemenin belajar yaa! 🐼`,
   ];
 
   let greetings;
@@ -49,16 +49,16 @@ export function getGreeting(name: string = 'Kiya'): string {
 
 export const jeyaMessages = {
   encouragement: [
-    'Kiya pasti bisa! 💪🐼',
-    'Keep going Kiya! Kamu amazing! ✨',
-    'Semangat terus yaa! 🔥',
-    'Jeya tau Kiya bisa! Let\'s go! 🌟',
+    'Kiya pasti bisa! 🐼',
+    'Keep going gendutt! Kamu keren!',
+    'Semangat terus yaa!',
+    'Jeya tau Kiya bisa! Let\'s go! ',
   ],
 
   celebration: [
     'KEREN KIYA! 🎉🐼',
-    'Perfect! Kiya mantap banget! 🌟',
-    'Yesss! That\'s my Kiya! 💪✨',
+    'Perfect! Kiya mantap banget! ',
+    'Yesss! That\'s my gendutt! ',
     'Luar biasa Kiya! Jeya bangga! 🎉',
   ],
 
@@ -79,10 +79,10 @@ export const jeyaMessages = {
   ],
 
   loading: [
-    'Lagi nyiapin soal yang seru nih! 🎯',
-    'AI-nya lagi mikir keras buat Kiya! 🧠',
-    'Tunggu sebentar, hampir siap! ✨',
-    'Preparing your challenge! 💪',
+    'Lagi nyiapin soal yang seru nih!',
+    'AI-nya lagi mikir keras buat Kiya! ',
+    'Tunggu sebentar, hampir siap',
+    'Preparing your challenge! ',
     'Jeya lagi pilih-pilih soal terbaik! 🐼',
   ],
 };

@@ -68,7 +68,7 @@ export function MaterialDashboard({ topics, progressData, overallProgress }: Mat
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          🌌 Galaksi Pembelajaran KSR
+          Kiyaa Learning Space
         </motion.h1>
         <p className="dashboard-subtitle" style={{ color: 'var(--muted)' }}>Pilih topik untuk mulai belajar</p>
       </div>

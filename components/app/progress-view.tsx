@@ -47,7 +47,7 @@ export function ProgressView() {
   return (
     <div className="progress-container">
       <div className="progress-header">
-        <h2>Progress Belajar Kiya</h2>
+        <h2>Progress Belajar Kiyaa</h2>
         <p>Statistik evaluasi latihan kamu</p>
       </div>
 

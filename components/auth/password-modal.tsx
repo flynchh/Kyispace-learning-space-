@@ -141,7 +141,7 @@ export function PasswordModal({ userName, correctPassword, onCorrect, onCancel }
 
         {userName === 'Kiya' && (
           <p className="text-xs text-center text-muted mt-4">
-            Hint: Tanggal spesial Kiya (DDMMYY) 💝
+            Hint: Our Special Date (DDMMYY) 💝
           </p>
         )}
       </motion.div>
