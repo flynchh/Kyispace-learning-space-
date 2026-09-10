@@ -83,28 +83,51 @@ async function calculateStreak(userId: string): Promise<number> {
 
 export async function GET() {
   try {
+    const session = await getSession();
+
     const allTopics = await prisma.topic.findMany({
       orderBy: { order: 'asc' },
     });
 
     const progressData: Record<string, TopicProgress> = {};
-    
-    for (const topic of allTopics) {
-      progressData[topic.name] = {
-        status: 'new',
-        attempts: 0,
-        bestScore: null,
-        lastAttempt: null,
-        percentage: 0,
-      };
+
+    if (session) {
+      for (const topic of allTopics) {
+        progressData[topic.name] = await getUserTopicProgress(session.id, topic.name);
+      }
+    } else {
+      for (const topic of allTopics) {
+        progressData[topic.name] = {
+          status: 'new',
+          attempts: 0,
+          bestScore: null,
+          lastAttempt: null,
+          percentage: 0,
+        };
+      }
     }
 
+    const completedCount = Object.values(progressData).filter(
+      (p) => p.status !== 'new'
+    ).length;
+
+    const scores = Object.values(progressData)
+      .filter((p) => p.bestScore !== null)
+      .map((p) => p.bestScore!);
+
+    const avgScore =
+      scores.length > 0
+        ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
+        : 0;
+
+    const streak = session ? await calculateStreak(session.id) : 0;
+
     const overallProgress = {
-      completed: 0,
+      completed: completedCount,
       total: allTopics.length,
-      percentage: 0,
-      avgScore: 0,
-      streak: 0,
+      percentage: Math.round((completedCount / allTopics.length) * 100),
+      avgScore,
+      streak,
     };
 
     return NextResponse.json({

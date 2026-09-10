@@ -1650,3 +1650,97 @@ button:focus-visible {
 .theme-sky .empty-state p {
   color: #475569;
 }
+
+/* Additional global text overrides for Sky theme readability */
+.theme-sky .glass-card h1,
+.theme-sky .glass-card h2,
+.theme-sky .glass-card h3,
+.theme-sky .glass-card .text-foreground {
+  color: #1e293b !important;
+}
+
+.theme-sky .glass-card p,
+.theme-sky .glass-card .text-muted,
+.theme-sky .glass-card label,
+.theme-sky .glass-card span:not(.btn-icon) {
+  color: #475569;
+}
+
+/* Ensure inputs are legible in Sky theme */
+.theme-sky input {
+  color: #1e293b !important;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border-color: rgba(2, 132, 199, 0.2) !important;
+}
+.theme-sky input::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Modal specific text overrides for Sky */
+.theme-sky .password-modal h2 {
+  color: #0284c7 !important;
+}
+.theme-sky .password-input {
+  color: #1e293b !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(2, 132, 199, 0.3) !important;
+}
+.theme-sky .btn-primary {
+  background-color: #0284c7 !important;
+  color: white !important;
+}
+
+/* ============================================
+   GLOBAL SKY THEME OVERRIDES (FIX CONTRAST)
+   ============================================ */
+.theme-sky .text-foreground {
+  color: #1e293b !important;
+}
+
+.theme-sky .text-muted {
+  color: #475569 !important;
+}
+
+.theme-sky .glass-card {
+  color: #1e293b !important;
+}
+
+/* Fix input colors on Login screen for Sky Theme */
+.theme-sky input {
+  color: #1e293b !important;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border-color: rgba(2, 132, 199, 0.2) !important;
+}
+
+.theme-sky input::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Fix Password Modal specific colors for Sky Theme */
+.theme-sky .password-modal {
+  color: #1e293b !important;
+}
+
+.theme-sky .password-input {
+  color: #1e293b !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(2, 132, 199, 0.3) !important;
+}
+
+/* ============================================
+   LAYOUT FIXES
+   ============================================ */
+/* Ensure the topics grid expands fully to allow auto-fill */
+.topics-grid {
+  width: 100%;
+}
+
+.topic-card-new {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-actions {
+  margin-top: auto;
+}
