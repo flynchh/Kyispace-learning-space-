@@ -1,6 +1,8 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import Groq from 'groq-sdk';
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '' });
 
 export type QuizQuestion = {
   question: string;
@@ -28,8 +30,6 @@ export async function generateQuiz(
   difficulty: Difficulty,
   count: number = 15
 ): Promise<QuizQuestion[]> {
-  const model = genAI.getGenerativeModel({ model: 'gemini-3.6-flash' });
-
   const prompt = `Kamu adalah generator soal IPA Terpadu SMP untuk persiapan lomba KSR (Kompetisi Sains SMP).
 
 TOPIC: ${topic}
@@ -64,8 +64,14 @@ FORMAT OUTPUT (JSON array):
 HANYA return JSON array, tanpa teks tambahan, tanpa markdown code block, tanpa penjelasan.`;
 
   try {
-    const result = await model.generateContent(prompt);
-    const text = result.response.text();
+    const completion = await groq.chat.completions.create({
+      messages: [{ role: 'user', content: prompt }],
+      model: 'openai/gpt-oss-120b',
+      temperature: 0.7,
+      max_tokens: 4096,
+    });
+
+    const text = completion.choices[0]?.message?.content || '';
     
     const cleaned = text
       .replace(/```json\n?/g, '')
@@ -80,7 +86,7 @@ HANYA return JSON array, tanpa teks tambahan, tanpa markdown code block, tanpa p
     
     return questions;
   } catch (error) {
-    console.error('AI Generation Error:', error);
+    console.error('Groq Generation Error:', error);
     throw new Error('Failed to generate quiz questions');
   }
 }

@@ -333,7 +333,7 @@ export function QuizInterface({
           onClick={() => setShowDrawer(true)}
           className="quiz-drawer-btn"
         >
-          {answeredCount}/{questions.length}
+          {current + 1}/{questions.length}
         </button>
 
         {current < questions.length - 1 ? (

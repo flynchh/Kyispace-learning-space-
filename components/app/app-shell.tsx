@@ -26,8 +26,10 @@ export function AppShell({ userName, userRole, children }: AppShellProps) {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [greeting, setGreeting] = useState(`Halo, ${userName}`);
   const { isMuted, toggleMute } = useSoundEffects();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     setGreeting(getGreeting(userName));
   }, [userName]);
 
@@ -67,18 +69,20 @@ export function AppShell({ userName, userRole, children }: AppShellProps) {
           <h1 className="app-greeting">{greeting}</h1>
         </div>
         <div className="app-topbar-actions">
-          <button
-            type="button"
-            className="theme-toggle"
-            onClick={toggleMute}
-            aria-label={isMuted ? 'Nyalakan suara' : 'Matikan suara'}
-            title={isMuted ? 'Suara Mati' : 'Suara Nyala'}
-          >
-            <span className="theme-toggle-icon">
-              {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-            </span>
-            <span className="theme-toggle-label">{isMuted ? 'Mute' : 'Sound'}</span>
-          </button>
+          {mounted && (
+            <button
+              type="button"
+              className="theme-toggle"
+              onClick={toggleMute}
+              aria-label={isMuted ? 'Nyalakan suara' : 'Matikan suara'}
+              title={isMuted ? 'Suara Mati' : 'Suara Nyala'}
+            >
+              <span className="theme-toggle-icon">
+                {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+              </span>
+              <span className="theme-toggle-label">{isMuted ? 'Mute' : 'Sound'}</span>
+            </button>
+          )}
           <ThemeToggle />
           <button 
             type="button" 

@@ -7,12 +7,17 @@ export async function GET() {
       orderBy: { order: 'asc' },
     });
 
-    return NextResponse.json({ topics });
+    return NextResponse.json({
+      topics: topics.map(topic => ({
+        id: topic.id,
+        name: topic.name,
+        category: topic.category,
+        icon: topic.icon,
+        order: topic.order,
+      }))
+    });
   } catch (error) {
-    console.error('Topics fetch error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch topics' },
-      { status: 500 }
-    );
+    console.error('Topics API error:', error);
+    return NextResponse.json({ topics: [] });
   }
 }
