@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useThemeStore } from '@/lib/theme-store';
 
@@ -29,7 +28,7 @@ export function TopicCard({ topic, progress, onClick }: TopicCardProps) {
 
   const getStatusBadge = () => {
     if (progress.status === 'new') {
-      return <span className="status-badge status-new">🆕 Baru</span>;
+      return <span className="status-badge status-new">🆕 Belum Mulai</span>;
     }
     if (progress.status === 'mastered') {
       return <span className="status-badge status-mastered">🏆 Master</span>;
@@ -37,14 +36,14 @@ export function TopicCard({ topic, progress, onClick }: TopicCardProps) {
     if (progress.status === 'completed') {
       return <span className="status-badge status-completed">✅ Lulus</span>;
     }
-    return <span className="status-badge status-progress">⚠️ Progress</span>;
+    return <span className="status-badge status-progress">⚡ Dalam Proses</span>;
   };
 
   const getProgressColor = () => {
-    if (progress.percentage >= 80) return 'from-emerald-500 to-green-500';
-    if (progress.percentage >= 60) return 'from-cyan-500 to-blue-500';
-    if (progress.percentage >= 40) return 'from-amber-500 to-orange-500';
-    return 'from-rose-500 to-red-500';
+    if (progress.percentage >= 80) return 'from-emerald-400 to-green-500';
+    if (progress.percentage >= 60) return 'from-cyan-400 to-blue-500';
+    if (progress.percentage >= 40) return 'from-amber-400 to-orange-500';
+    return 'from-rose-400 to-red-500';
   };
 
   return (
@@ -64,38 +63,57 @@ export function TopicCard({ topic, progress, onClick }: TopicCardProps) {
 
       <h3 className="card-title">{topic.name}</h3>
 
-      {progress.status !== 'new' && (
-        <>
-          <div className="progress-container">
-            <div className="progress-track">
-              <motion.div
-                className={`progress-fill bg-gradient-to-r ${getProgressColor()}`}
-                initial={{ width: 0 }}
-                animate={{ width: `${progress.percentage}%` }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
-              />
-            </div>
-            <span className="progress-text">{progress.percentage}%</span>
-          </div>
-
-          <div className="card-stats">
-            {getStatusBadge()}
-            {progress.bestScore !== null && (
-              <span className="score-badge">⭐ {progress.bestScore}%</span>
-            )}
-          </div>
-        </>
-      )}
-
-      {progress.status === 'new' && (
-        <div className="card-stats">
-          {getStatusBadge()}
+      {/* Progress Section */}
+      <div className="card-progress-section">
+        <div className="flex justify-between items-center text-xs mb-1.5 font-semibold">
+          <span className="text-[var(--muted)]">Penguasaan</span>
+          <span className="font-bold text-[var(--accent)]">{progress.percentage}%</span>
         </div>
-      )}
+        <div className="progress-track">
+          <motion.div
+            className={`progress-fill bg-gradient-to-r ${getProgressColor()}`}
+            initial={{ width: 0 }}
+            animate={{ width: `${Math.max(progress.percentage, 2)}%` }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          />
+        </div>
+      </div>
 
-      <div className="card-actions">
-        <button className="btn-study">📖 Belajar</button>
-        <button className="btn-quiz">🎯 Quiz</button>
+      {/* Stats Badges */}
+      <div className="card-stats mt-3">
+        {getStatusBadge()}
+        {progress.attempts > 0 ? (
+          <span className="score-badge">📝 {progress.attempts}x Kuis</span>
+        ) : (
+          <span className="score-badge">📚 15 Soal</span>
+        )}
+        {progress.bestScore !== null && (
+          <span className="score-badge">⭐ Best: {progress.bestScore}%</span>
+        )}
+      </div>
+
+      {/* Actions */}
+      <div className="card-actions mt-4">
+        <button
+          type="button"
+          className="btn-study"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick();
+          }}
+        >
+          📖 Belajar
+        </button>
+        <button
+          type="button"
+          className="btn-quiz"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick();
+          }}
+        >
+          🎯 Quiz
+        </button>
       </div>
     </motion.div>
   );
