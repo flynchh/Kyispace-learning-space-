@@ -111,7 +111,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .theme-toggle { min-height: 44px; display: inline-flex; align-items: center; gap: .55rem; padding: .45rem .8rem .45rem .5rem; color: var(--foreground); background: var(--surface-strong); border: 1px solid var(--border); border-radius: 999px; box-shadow: 0 10px 30px var(--shadow); cursor: pointer; transition: transform .2s ease, background .45s ease, box-shadow .2s ease; }
 .theme-toggle:hover { transform: translateY(-2px); box-shadow: 0 14px 34px var(--shadow); }
 .theme-toggle:active { transform: scale(.96); }
-.theme-toggle-icon { width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 50%; font-size: 1.2rem; line-height: 1; background: linear-gradient(135deg, var(--accent), var(--accent-strong)); color: #fff; animation: toggleSpin .55s ease; }
+.theme-toggle-icon { width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 50%; font-size: 1.2rem; line-height: 1; background: var(--accent); color: #fff; animation: toggleSpin .55s ease; }
 .theme-toggle-label { font-size: .78rem; font-weight: 750; letter-spacing: .02em; }
 
 @keyframes naturalTwinkle { 0% { transform: scale(.72); opacity: .22; } 45% { transform: scale(1); opacity: .9; } 100% { transform: scale(.82); opacity: .42; } }
@@ -444,7 +444,7 @@ button:focus-visible {
 
 /* Improved button styles */
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  background: var(--accent);
   color: #000;
   font-weight: 700;
   padding: 12px 24px;
