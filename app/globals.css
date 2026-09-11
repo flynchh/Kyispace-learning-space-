@@ -71,7 +71,7 @@ button { -webkit-tap-highlight-color: transparent; }
 
 .space-scene, .sky-scene { position: fixed; inset: 0; overflow: hidden; z-index: -1; pointer-events: none; }
 .space-scene { background: #030303; }
-.sky-scene { background: radial-gradient(circle at 74% 18%, rgba(255,255,255,.9) 0%, transparent 14%), linear-gradient(160deg, #7dd3fc 0%, #c7efff 47%, #effcff 100%); }
+.sky-scene { background: #dff5ff; }
 
 .starfield { position: absolute; inset: 0; overflow: hidden; }
 .star { position: absolute; display: block; border-radius: 50%; background: #fff; box-shadow: 0 0 4px rgba(255,255,255,.5); animation: naturalTwinkle ease-in-out infinite alternate; will-change: opacity, transform; }

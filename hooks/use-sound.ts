@@ -6,10 +6,7 @@ type SoundEffect =
   | 'high-score'
   | 'mid-score'
   | 'low-score'
-  | 'page-flip'
   | 'button-click'
-  | 'unlock'
-  | 'streak'
   | 'confetti';
 
 interface SoundConfig {
@@ -57,10 +54,7 @@ export const useSound = () => {
       'high-score': '/sounds/celebration.mp3',
       'mid-score': '/sounds/positive-chime.mp3',
       'low-score': '/sounds/encouraging.mp3',
-      'page-flip': '/sounds/paper-flip.mp3',
       'button-click': '/sounds/soft-tap.mp3',
-      'unlock': '/sounds/unlock-click.mp3',
-      'streak': '/sounds/streak-whoosh.mp3',
       'confetti': '/sounds/confetti-pop.mp3',
     };
 
@@ -113,10 +107,7 @@ export const useSoundEffects = () => {
     playHighScore: () => playSound('high-score'),
     playMidScore: () => playSound('mid-score'),
     playLowScore: () => playSound('low-score'),
-    playPageFlip: () => playSound('page-flip'),
     playButtonClick: () => playSound('button-click'),
-    playUnlock: () => playSound('unlock'),
-    playStreak: () => playSound('streak'),
     playConfetti: () => playSound('confetti'),
     toggleMute,
     setVolume,
