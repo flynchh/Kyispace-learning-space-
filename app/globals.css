@@ -111,8 +111,8 @@ button { -webkit-tap-highlight-color: transparent; }
 .theme-toggle { min-height: 44px; display: inline-flex; align-items: center; gap: .55rem; padding: .45rem .8rem .45rem .5rem; color: var(--foreground); background: var(--surface-strong); border: 1px solid var(--border); border-radius: 999px; box-shadow: 0 10px 30px var(--shadow); cursor: pointer; transition: transform .2s ease, background .45s ease, box-shadow .2s ease; }
 .theme-toggle:hover { transform: translateY(-2px); box-shadow: 0 14px 34px var(--shadow); }
 .theme-toggle:active { transform: scale(.96); }
-.theme-toggle-icon { width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 50%; font-size: 1.2rem; line-height: 1; background: var(--accent-strong); color: #fff; box-shadow: 0 0 12px rgba(168, 85, 247, 0.4), 0 0 24px rgba(168, 85, 247, 0.2); transition: box-shadow 0.3s ease; animation: toggleSpin .55s ease; }
-.theme-toggle:hover .theme-toggle-icon { box-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 0 0 40px rgba(168, 85, 247, 0.3); }
+.theme-toggle-icon { width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 50%; font-size: 1.2rem; line-height: 1; background: radial-gradient(circle at 30% 28%, color-mix(in srgb, var(--accent-strong) 72%, white), var(--accent-strong) 64%); color: #fff; box-shadow: inset 0 1px 2px rgba(255,255,255,.32), inset 0 -2px 4px rgba(0,0,0,.2), 0 0 12px rgba(168, 85, 247, 0.4), 0 0 24px rgba(168, 85, 247, 0.2); transition: box-shadow 0.3s ease; animation: toggleSpin .55s ease; }
+.theme-toggle:hover .theme-toggle-icon { box-shadow: inset 0 1px 2px rgba(255,255,255,.4), inset 0 -2px 4px rgba(0,0,0,.16), 0 0 20px rgba(168, 85, 247, 0.6), 0 0 40px rgba(168, 85, 247, 0.3); }
 .theme-toggle-label { font-size: .78rem; font-weight: 750; letter-spacing: .02em; }
 
 @keyframes naturalTwinkle { 0% { transform: scale(.72); opacity: .22; } 45% { transform: scale(1); opacity: .9; } 100% { transform: scale(.82); opacity: .42; } }
@@ -445,14 +445,14 @@ button:focus-visible {
 
 /* Improved button styles */
 .btn-primary {
-  background: var(--accent);
+  background: radial-gradient(circle at 28% 18%, color-mix(in srgb, var(--accent) 68%, white), var(--accent) 58%);
   color: #000;
   font-weight: 700;
   padding: 12px 24px;
   border-radius: 12px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(103, 232, 249, 0.3);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.35), 0 4px 12px rgba(103, 232, 249, 0.3);
   transition: all 0.2s ease;
 }
 
@@ -1695,7 +1695,7 @@ button:focus-visible {
   border-color: rgba(2, 132, 199, 0.3) !important;
 }
 .theme-sky .btn-primary {
-  background-color: #0284c7 !important;
+  background: radial-gradient(circle at 28% 18%, #38bdf8, #0284c7 58%) !important;
   color: white !important;
 }
 
