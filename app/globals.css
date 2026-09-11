@@ -266,7 +266,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .flyover-root { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; pointer-events: none; overflow: hidden; }
 .flyover-backdrop { position: absolute; inset: 0; transition: opacity 0.4s ease; }
 .flyover-backdrop-space { background: radial-gradient(circle at 30% 70%, rgba(103,232,249,0.18), transparent 50%), #000; }
-.flyover-backdrop-sky { background: radial-gradient(circle at 70% 30%, rgba(56,189,248,0.2), transparent 40%), linear-gradient(160deg, #7dd3fc 0%, #c7efff 47%, #effcff 100%); }
+.flyover-backdrop-sky { background: #dff5ff; }
 
 /* Text layer */
 .flyover-text { position: relative; z-index: 2; text-align: center; padding: 1rem; transition: opacity 0.5s ease; }
