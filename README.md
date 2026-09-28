@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎓 Quiz KSR Platform
 
-## Getting Started
+> Platform Quiz Interaktif untuk Belajar Keamanan Sistem dan Rekayasa
 
-First, run the development server:
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📖 About
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Quiz KSR Platform** adalah platform edukatif yang dirancang khusus untuk membantu belajar materi Keamanan Sistem dan Rekayasa dengan cara yang lebih interaktif dan menyenangkan.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Platform ini menggunakan teknologi **AI untuk menghasilkan soal-soal quiz secara dinamis**, sehingga materi pembelajaran selalu fresh dan bervariasi. Dengan fitur progress tracking dan analytics, kamu bisa memantau perkembangan belajar dengan mudah.
 
-## Learn More
+Dibuat dengan tujuan membuat proses belajar menjadi lebih engaging melalui elemen-elemen interaktif seperti sound effects, mascot, dan feedback real-time yang membantu memahami materi dengan lebih baik.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✨ Key Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🤖 **AI-Powered Quiz Generation**
+Soal quiz dihasilkan secara dinamis menggunakan AI, memberikan variasi pertanyaan yang berbeda setiap kali belajar.
 
-## Deploy on Vercel
+### 📊 **Progress Tracking & Analytics**
+Monitor kemajuan belajar dengan dashboard analytics yang menampilkan statistik dan performa quiz secara detail.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 📚 **Materi Pembelajaran Terstruktur**
+Akses materi pembelajaran yang disusun secara sistematis dengan progress tracking untuk setiap topik.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🎵 **Interactive Learning Experience**
+Belajar menjadi lebih seru dengan sound effects yang responsif dan mascot interaktif yang memberikan feedback.
+
+### 🔐 **User Authentication**
+Setiap pengguna memiliki akun pribadi dengan progress tracking yang tersimpan secara aman.
+
+### 🎨 **Theme Customization**
+Personalisasi tampilan aplikasi sesuai dengan preferensi visual yang kamu sukai.
+
+---
+
+## 📸 Screenshots
+
+### Dashboard
+<!-- Add dashboard screenshot here -->
+![Dashboard Preview](./public/screenshots/dashboard.png)
+
+### Quiz Interface
+<!-- Add quiz interface screenshot here -->
+![Quiz Interface](./public/screenshots/quiz-interface.png)
+
+### Progress Tracking
+<!-- Add progress tracking screenshot here -->
+![Progress Tracking](./public/screenshots/progress-tracking.png)
+
+### Materi Pembelajaran
+<!-- Add learning material screenshot here -->
+![Learning Material](./public/screenshots/materi.png)
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| **Next.js 15** | React framework with App Router for modern web development |
+| **TypeScript** | Type-safe development for better code quality |
+| **Prisma ORM** | Database management with type-safe queries |
+| **Tailwind CSS** | Utility-first CSS framework for responsive design |
+| **SQLite** | Lightweight database (production-ready for PostgreSQL) |
+
+---
+
+<div align="center">
+
+</div>
